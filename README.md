@@ -2,7 +2,7 @@
   <img src="https://i.imgur.com/faK0EcR.png">
 </p>
 
-Minecraft's pickup system has many flaws that this plugin aims to fix. Many aspects of the pickup system can be configured, such as:
+Minecraft's pickup system has many flaws that BetterPickup-OG aims to fix. Many aspects of the pickup system can be configured, such as:
 - Make block drops automatically pickup
 - Make block drops invulnerable
 - Change the pickup delay for block drops

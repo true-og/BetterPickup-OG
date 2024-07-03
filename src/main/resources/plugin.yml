@@ -1,0 +1,17 @@
+name: BetterPickup-OG
+description: Greatly improves the drop system
+authors: [NotAlexNoyle, Chai]
+main: plugin.BetterPickupOG
+version: '${version}'
+api-version: 1.19
+
+commands:
+  betterpickup:
+    description: Better Pickup
+    default: true
+    usage: "Usage: /betterpickup [info|reload]"
+
+permissions:
+  betterpickup.reload:
+    default: op
+    description: Allows you to reload the config
