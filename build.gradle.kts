@@ -1,8 +1,8 @@
 plugins {
+    id("com.gradleup.shadow") version "8.3.2" // Import shadow API.
     java // Tell gradle this is a java project.
-    id("io.github.goooler.shadow") version "8.1.8"
     eclipse // Import eclipse plugin for IDE integration.
-    kotlin("jvm") version "1.9.23" // Import kotlin jvm plugin for kotlin/java integration.
+    kotlin("jvm") version "2.0.20" // Import kotlin jvm plugin for kotlin/java integration.
 }
 
 java {
@@ -29,7 +29,7 @@ tasks.named<ProcessResources>("processResources") {
 
 repositories {
     mavenCentral()
-
+    gradlePluginPortal()
     maven {
         url = uri("https://repo.purpurmc.org/snapshots")
     }
@@ -40,19 +40,9 @@ dependencies {
     compileOnly("io.github.miniplaceholders:miniplaceholders-api:2.2.3") // Import MiniPlaceholders API.
 }
 
-tasks.withType<AbstractArchiveTask>().configureEach {
+tasks.withType<AbstractArchiveTask>().configureEach { // Ensure reproducible builds.
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
-}
-
-tasks.shadowJar {
-    exclude("io.github.miniplaceholders.*") // Exclude the MiniPlaceholders package from being shadowed.
-    minimize()
-}
-
-tasks.jar {
-    dependsOn(tasks.shadowJar)
-    archiveClassifier.set("part")
 }
 
 tasks.shadowJar {
@@ -60,14 +50,21 @@ tasks.shadowJar {
     from("LICENSE") {
         into("/")
     }
+    exclude("io.github.miniplaceholders.*") // Exclude the MiniPlaceholders package from being shadowed.
+    minimize()
+}
+
+tasks.build {
+    dependsOn(tasks.shadowJar)
 }
 
 tasks.jar {
-    dependsOn("shadowJar")
+    archiveClassifier.set("part")
 }
 
 tasks.withType<JavaCompile>().configureEach {
     options.compilerArgs.add("-parameters")
+    options.compilerArgs.add("-Xlint:deprecation") // Triggers deprecation warning messages.
     options.encoding = "UTF-8"
     options.isFork = true
 }
