@@ -4,89 +4,79 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class BetterPickupOG extends JavaPlugin {
 
-	// Declare variable to hold class for passing.
-	private static BetterPickupOG plugin;
+    // Declare variable to hold class for passing.
+    private static BetterPickupOG plugin;
 
-	// Declare fields.
-	private boolean autoPickup;
-	private int blockDropDelay;
-	private boolean invulnerable;
-	private int playerDropDelay;
-	private int stealDelay;
+    // Declare fields.
+    private boolean autoPickup;
+    private int blockDropDelay;
+    private boolean invulnerable;
+    private int playerDropDelay;
+    private int stealDelay;
 
-	@Override
-	public void onEnable() {
+    @Override
+    public void onEnable() {
 
-		// Config stuff.
-		saveDefaultConfig();
-		reload();
+        // Config stuff.
+        saveDefaultConfig();
+        reload();
 
-		// Assign the plugin variable to the main class instance.
-		plugin = this;
+        // Assign the plugin variable to the main class instance.
+        plugin = this;
 
-		// Register command.
-		getCommand("betterpickup").setExecutor(new ReloadCommand());
+        // Register command.
+        getCommand("betterpickup").setExecutor(new ReloadCommand());
 
-		// Listeners.
-		getServer().getPluginManager().registerEvents(new DropListener(), this);
+        // Listeners.
+        getServer().getPluginManager().registerEvents(new DropListener(), this);
+    }
 
-	}
+    @Override
+    public void onDisable() {
 
-	@Override
-	public void onDisable() {
+        this.getLogger().info("BetterPickup-OG shut down successfully.");
+    }
 
-		this.getLogger().info("BetterPickup-OG shut down successfully.");
+    public void reload() {
 
-	}
+        reloadConfig();
 
-	public void reload() {
+        autoPickup = getConfig().getBoolean("autoPickup");
+        blockDropDelay = getConfig().getInt("blockDropDelay");
+        invulnerable = getConfig().getBoolean("invulnerable");
+        playerDropDelay = getConfig().getInt("playerDropDelay");
+        stealDelay = getConfig().getInt("stealDelay");
+    }
 
-		reloadConfig();
+    // Class constructor.
+    public static BetterPickupOG getPlugin() {
 
-		autoPickup = getConfig().getBoolean("autoPickup");
-		blockDropDelay = getConfig().getInt("blockDropDelay");
-		invulnerable = getConfig().getBoolean("invulnerable");
-		playerDropDelay = getConfig().getInt("playerDropDelay");
-		stealDelay = getConfig().getInt("stealDelay");
+        // Pass instance of main to other classes.
+        return plugin;
+    }
 
-	}
+    public boolean autoPickup() {
 
-	// Class constructor.
-	public static BetterPickupOG getPlugin() {
+        return autoPickup;
+    }
 
-		// Pass instance of main to other classes.
-		return plugin;
+    public int blockDropDelay() {
 
-	}
+        return blockDropDelay;
+    }
 
-	public boolean autoPickup() {
+    public boolean invulnerable() {
 
-		return autoPickup;
+        return invulnerable;
+    }
 
-	}
+    public int playerDropDelay() {
 
-	public int blockDropDelay() {
+        return playerDropDelay;
+    }
 
-		return blockDropDelay;
+    public int stealDelay() {
 
-	}
-
-	public boolean invulnerable() {
-
-		return invulnerable;
-
-	}
-
-	public int playerDropDelay() {
-
-		return playerDropDelay;
-
-	}
-
-	public int stealDelay() {
-
-		return stealDelay;
-
-	}
-
+        return stealDelay;
+    }
 }
