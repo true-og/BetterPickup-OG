@@ -27,6 +27,7 @@ public class ReloadCommand implements CommandExecutor {
                 Logger logger = Bukkit.getServer().getLogger();
                 // Log the output to the console.
                 logger.info(Utils.legacySerializerAnyCase(info).content());
+
             }
 
             return true;
@@ -35,13 +36,15 @@ public class ReloadCommand implements CommandExecutor {
 
             if (!sender.hasPermission("betterpickup.reload")) {
 
-                // Since the sender doesn't have permission, it can't be the console, so sender can be casted directly
+                // Since the sender doesn't have permission, it can't be the console, so sender
+                // can be casted directly
                 // to Player.
                 // Send formatted message.
-                Utils.betterPickupOGMessage(
-                        (Player) sender, "&cERROR: You do not have permission to run this command.");
+                Utils.betterPickupOGMessage((Player) sender,
+                        "&cERROR: You do not have permission to run this command.");
 
                 return true;
+
             }
 
             // Reload config.
@@ -63,6 +66,7 @@ public class ReloadCommand implements CommandExecutor {
                 Logger logger = Bukkit.getServer().getLogger();
                 // Log the output to the console.
                 logger.info(Utils.legacySerializerAnyCase(reload).content());
+
             }
 
             return true;
@@ -70,6 +74,9 @@ public class ReloadCommand implements CommandExecutor {
         } else {
 
             return false;
+
         }
+
     }
+
 }

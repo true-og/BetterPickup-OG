@@ -29,12 +29,14 @@ public class BetterPickupOG extends JavaPlugin {
 
         // Listeners.
         getServer().getPluginManager().registerEvents(new DropListener(), this);
+
     }
 
     @Override
     public void onDisable() {
 
         this.getLogger().info("BetterPickup-OG shut down successfully.");
+
     }
 
     public void reload() {
@@ -46,6 +48,7 @@ public class BetterPickupOG extends JavaPlugin {
         invulnerable = getConfig().getBoolean("invulnerable");
         playerDropDelay = getConfig().getInt("playerDropDelay");
         stealDelay = getConfig().getInt("stealDelay");
+
     }
 
     // Class constructor.
@@ -53,30 +56,37 @@ public class BetterPickupOG extends JavaPlugin {
 
         // Pass instance of main to other classes.
         return plugin;
+
     }
 
     public boolean autoPickup() {
 
         return autoPickup;
+
     }
 
     public int blockDropDelay() {
 
         return blockDropDelay;
+
     }
 
     public boolean invulnerable() {
 
         return invulnerable;
+
     }
 
     public int playerDropDelay() {
 
         return playerDropDelay;
+
     }
 
     public int stealDelay() {
 
         return stealDelay;
+
     }
+
 }

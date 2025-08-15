@@ -47,9 +47,13 @@ public class DropListener implements Listener {
                         item.teleport(entry.getValue());
 
                         i.remove();
+
                     }
+
                 }
+
             }
+
         }.runTaskTimer(plugin, 0L, 1L);
 
         new BukkitRunnable() {
@@ -58,18 +62,22 @@ public class DropListener implements Listener {
             public void run() {
 
                 // Iterate through player dropped items.
-                Iterator<Map.Entry<Item, Map.Entry<Player, Integer>>> i =
-                        playerDrops.entrySet().iterator();
+                Iterator<Map.Entry<Item, Map.Entry<Player, Integer>>> i = playerDrops.entrySet().iterator();
                 while (i.hasNext()) {
 
                     // Clean up.
                     if (!i.next().getKey().isValid()) {
 
                         i.remove();
+
                     }
+
                 }
+
             }
+
         }.runTaskTimer(plugin, 0L, 6000L); // Every 5 minutes when items despawn.
+
     }
 
     @EventHandler
@@ -82,15 +90,19 @@ public class DropListener implements Listener {
             if (plugin.autoPickup()) {
 
                 blockDrops.put(i, event.getPlayer());
-                playerDrops.put(
-                        i,
+                playerDrops.put(i,
                         new AbstractMap.SimpleEntry<Player, Integer>(event.getPlayer(), plugin.blockDropDelay() + 1));
+
             }
+
             if (plugin.invulnerable()) {
 
                 i.setInvulnerable(true);
+
             }
+
         }
+
     }
 
     @EventHandler
@@ -99,10 +111,11 @@ public class DropListener implements Listener {
         event.getItemDrop().setPickupDelay(plugin.playerDropDelay());
         if (plugin.stealDelay() > 0) {
 
-            playerDrops.put(
-                    event.getItemDrop(),
+            playerDrops.put(event.getItemDrop(),
                     new AbstractMap.SimpleEntry<Player, Integer>(event.getPlayer(), plugin.stealDelay()));
+
         }
+
     }
 
     @EventHandler
@@ -123,7 +136,11 @@ public class DropListener implements Listener {
 
                 // Remove from the map.
                 playerDrops.remove(item);
+
             }
+
         }
+
     }
+
 }
