@@ -2,10 +2,10 @@
 autoPickup: true
 
 # How long in ticks until block drops can be picked up (vanilla is 10 ticks)
-blockDropDelay: 10
+blockDropDelay: 5
 
 # Whether block drops should be invulnerable
-invulnerable: true
+invulnerable: false
 
 # How long in ticks until dropped items can be picked up (vanilla is 40 ticks)
 playerDropDelay: 20
